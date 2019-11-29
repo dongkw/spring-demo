@@ -1,5 +1,18 @@
 spring:
   application:
     name: config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/dongkw/spring-demo.git
+          search-paths: config-repo
+          username: dongkw
 server:
   port: 8888
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
