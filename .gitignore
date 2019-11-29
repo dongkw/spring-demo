@@ -1,0 +1,14 @@
+.DS_Store
+build/
+logs/
+.gradle/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+### Xinzhili ###
+/out/
+/logs/
+/bin/
+classes/
