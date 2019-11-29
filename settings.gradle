@@ -1,4 +1,4 @@
 rootProject.name = 'spring-demo'
 include 'eureka'
 include 'config'
-
+include 'config-repo'
