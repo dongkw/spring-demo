@@ -6,5 +6,5 @@ dependencies {
 
 
 bootJar {
-    mainClassName = 'xyz.jecy.eureka.ConfigApplication'
+    mainClassName = 'xyz.jecy.config.ConfigApplication'
 }
