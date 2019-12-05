@@ -7,7 +7,6 @@ logs/
 *.ipr
 *.iws
 
-### Xinzhili ###
 /out/
 /logs/
 /bin/
