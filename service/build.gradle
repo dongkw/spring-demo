@@ -3,3 +3,6 @@ version '0.0.1-SNAPSHOT'
 jar {
     enabled = false
 }
+bootJar {
+    enabled = false
+}

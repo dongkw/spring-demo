@@ -6,12 +6,14 @@ buildscript {
 
 }
 plugins {
-    id "base"
+    id "java"
+    id 'idea'
     id "io.spring.dependency-management" version "1.0.8.RELEASE"
     id "org.springframework.boot" version "2.1.9.RELEASE"
-
 }
-
+bootJar {
+    enabled = false
+}
 group = 'xyz.jecy'
 version = '0.0.1-SNAPSHOT'
 allprojects {
@@ -20,8 +22,6 @@ allprojects {
     apply plugin: 'idea'
     apply plugin: "org.springframework.boot"
     apply plugin: 'io.spring.dependency-management'
-    bootJar { enabled = false }
-
 
     dependencyManagement {
         imports {
@@ -32,6 +32,21 @@ allprojects {
     repositories {
         maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
         maven { url "https://plugins.gradle.org/m2/" }
+        mavenCentral()
+        maven {
+            credentials {
+                username 'g0uETP'
+                password 'mTjlwdQ55W'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/113197-release-J0KMpi/'
+        }
+        maven {
+            credentials {
+                username 'g0uETP'
+                password 'mTjlwdQ55W'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/113197-snapshot-Kix4rb/'
+        }
     }
 
 
@@ -45,17 +60,14 @@ subprojects {
         options.encoding = 'UTF-8'
         options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "-Werror"
     }
-    jar {
-        enabled = true
-    }
     configurations {
         providedRuntime
 
     }
     dependencies {
+        compileOnly 'org.projectlombok:lombok:1.18.10'
+        annotationProcessor 'org.projectlombok:lombok:1.18.10'
         implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'org.springframework.cloud:spring-cloud-starter-config'
-        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
         implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
