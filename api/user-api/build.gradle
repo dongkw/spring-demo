@@ -20,15 +20,11 @@ publishing {
                 username 'g0uETP'
                 password 'mTjlwdQ55W'
             }
-            url 'https://repo.rdc.aliyun.com/repository/113197-release-J0KMpi/'
+            def releasesRepoUrl = "https://repo.rdc.aliyun.com/repository/113197-release-J0KMpi/"
+            def snapshotsRepoUrl = "https://repo.rdc.aliyun.com/repository/113197-snapshot-Kix4rb/"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
         }
-        maven {
-            credentials {
-                username 'g0uETP'
-                password 'mTjlwdQ55W'
-            }
-            url 'https://repo.rdc.aliyun.com/repository/113197-snapshot-Kix4rb/'
-        }
+
     }
 
 }
