@@ -2,15 +2,13 @@ plugins {
     id 'java'
     id 'maven-publish'
 }
-bootJar {
-    enabled = true
-}
+
 publishing {
     publications {
-        maven(MavenPublication) {
+        api(MavenPublication) {
             groupId 'xyz.jecy'
-            artifactId 'user-api'
-            version "${userApiVersion}"
+            artifactId 'order-api'
+            version "${orderApiVersion}"
             from components.java
         }
     }
