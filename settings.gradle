@@ -1,7 +1,6 @@
 rootProject.name = 'spring-demo'
 include 'eureka'
 include 'config'
-include 'config-repo'
 include 'util'
 include 'api:user-api'
 include 'api:order-api'

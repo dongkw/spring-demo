@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 bootJar {
-    enabled = true
+    enabled = false
 }
 publishing {
     publications {

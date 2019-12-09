@@ -1,6 +1,8 @@
 package xyz.jecy.order.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,5 +25,20 @@ public class OrderService {
     ResponseEntity responseEntity = userClient.getUser("name");
     System.out.println(responseEntity.getBody());
     return List.of(new OrderInfo());
+  }
+
+  public static void list() {
+    List<List<String>> list = new ArrayList<>();
+    list.add(List.of("111", "222", "444"));
+    list.add(List.of("111", "222", "444"));
+
+    List<Integer> is = list.stream().map(t -> Integer.parseInt(t.get(2)))
+        .collect(Collectors.toList());
+    System.out.println(is);
+
+  }
+
+  public static void main(String[] args) {
+    list();
   }
 }

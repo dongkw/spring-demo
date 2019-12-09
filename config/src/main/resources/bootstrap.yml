@@ -3,11 +3,15 @@ spring:
     name: config
   cloud:
     config:
+      label: master
+        enabled: true
       server:
+        bootstrap: true
         git:
-          uri: https://github.com/dongkw/spring-demo.git
-          search-paths: config-repo
+          uri: https://github.com/dongkw/spring-demo
+          search-paths: 'config-repo'
           username: dongkw
+          password: a2158073
 server:
   port: 8888
 eureka:

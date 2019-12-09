@@ -2,7 +2,9 @@ plugins {
     id 'java'
     id 'maven-publish'
 }
-
+bootJar {
+    enabled = false
+}
 publishing {
     publications {
         api(MavenPublication) {
