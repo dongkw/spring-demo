@@ -1,11 +1,21 @@
 version '0.0.1-SNAPSHOT'
 
 dependencies {
-    compile (
+    compile(
             "xyz.jecy:user-api:${userApiVersion}"
     )
 }
-
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/java'
+            srcDir 'src/main/resources'
+        }
+    }
+}
 bootJar {
     mainClassName = 'xyz.jecy.user.UserApplication'
 }

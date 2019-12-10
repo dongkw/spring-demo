@@ -6,7 +6,17 @@ dependencies {
             "xyz.jecy:order-api:${orderApiVersion}"
     )
 }
-
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/java'
+            srcDir 'src/main/resources'
+        }
+    }
+}
 bootJar {
     mainClassName = 'xyz.jecy.order.OrderApplication'
 }
