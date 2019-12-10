@@ -4,20 +4,8 @@ dependencies {
     compile(
             'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
     )
-    implementation "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2"
-    implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
 }
-sourceSets {
-    main {
-        java {
-            srcDir 'src/main/java'
-        }
-        resources {
-            srcDir 'src/main/java'
-            srcDir 'src/main/resources'
-        }
-    }
-}
+
 bootJar {
     mainClassName = 'xyz.jecy.eureka.EurekaApplication'
 }

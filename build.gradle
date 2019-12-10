@@ -7,9 +7,14 @@ buildscript {
 }
 plugins {
     id "base"
+    id "java"
     id "io.spring.dependency-management" version "1.0.8.RELEASE"
     id "org.springframework.boot" version "2.1.9.RELEASE"
 
+}
+
+bootJar {
+    enabled = false
 }
 
 group = 'xyz.jecy'
@@ -20,11 +25,7 @@ allprojects {
     apply plugin: 'idea'
     apply plugin: "org.springframework.boot"
     apply plugin: 'io.spring.dependency-management'
-    bootJar { enabled = false }
 
-    jar {
-        enabled = true
-    }
     dependencyManagement {
         imports {
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:Greenwich.SR3"
@@ -55,6 +56,7 @@ allprojects {
 }
 
 subprojects {
+    apply plugin: 'java-library'
 
     sourceCompatibility = 9
     targetCompatibility = 9
