@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import xyz.jecy.user.bean.UserInfo;
 import xyz.jecy.user.client.UserClient;
 import xyz.jecy.user.service.UserService;
+import xyz.jecy.util.response.Response;
 
 /**
  * @Author dkw[dongkewei@xinzhili.cn]
@@ -20,9 +21,9 @@ public class UserController implements UserClient {
   @Autowired
   private UserService userService;
 
-  public ResponseEntity getUser(@RequestParam(value = "name", required = false) String name) {
+  public Response getUser(@RequestParam(value = "name", required = false) String name) {
     List<UserInfo> userInfos = userService.getUserInfo(name);
-    return ResponseEntity.ok(userInfos);
+    return Response.initSuccess(userInfos);
   }
 
 }

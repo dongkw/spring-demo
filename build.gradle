@@ -82,32 +82,9 @@ subprojects {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
         implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        implementation "xyz.jecy:util:${utilVersion}"
 
     }
-    if (version.contains("-")) {
-        publishing {
-            publications {
-                maven(MavenPublication) {
-                    groupId 'xyz.jecy'
-                    artifactId it.name
-                    version version
-                    from components.java
-                }
-            }
-            repositories {
-                maven {
-                    credentials {
-                        username 'g0uETP'
-                        password 'mTjlwdQ55W'
-                    }
-                    def releasesRepoUrl = "https://repo.rdc.aliyun.com/repository/113197-release-J0KMpi/"
-                    def snapshotsRepoUrl = "https://repo.rdc.aliyun.com/repository/113197-snapshot-Kix4rb/"
-                    url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-                }
 
-            }
-
-        }
-    }
 }
 

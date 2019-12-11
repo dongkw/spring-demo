@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import xyz.jecy.order.bean.OrderInfo;
 import xyz.jecy.user.bean.UserInfo;
 import xyz.jecy.user.client.UserClient;
+import xyz.jecy.util.response.Response;
 
 /**
  * @Author dkw[dongkewei@xinzhili.cn]
@@ -23,8 +24,8 @@ public class OrderService {
 
   public List<OrderInfo> getOrderInfo(Long id) {
 
-    ResponseEntity responseEntity = userClient.getUser("name");
-    System.out.println(responseEntity.getBody());
+    Response response = userClient.getUser("name");
+    System.out.println(response.getResult());
     return List.of(new OrderInfo());
   }
 

@@ -4,6 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import xyz.jecy.util.response.Response;
 
 /**
  * @Author dkw[dongkewei@xinzhili.cn]
@@ -13,6 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface OrderClient {
 
   @GetMapping("/order")
-  ResponseEntity getOrder(@RequestParam(value = "id", required = false) Long id);
+  Response getOrder(@RequestParam(value = "id", required = false) Long id);
 
 }

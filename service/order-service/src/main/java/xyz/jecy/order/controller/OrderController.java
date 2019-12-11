@@ -11,6 +11,7 @@ import xyz.jecy.order.bean.OrderInfo;
 import xyz.jecy.order.client.OrderClient;
 import xyz.jecy.order.service.OrderService;
 import xyz.jecy.user.bean.UserInfo;
+import xyz.jecy.util.response.Response;
 
 /**
  * @Author dkw[dongkewei@xinzhili.cn]
@@ -24,10 +25,11 @@ public class OrderController implements OrderClient {
 
 
   @Override
-  public ResponseEntity getOrder(@RequestParam(value = "id", required = false) Long id) {
+  public Response getOrder(@RequestParam(value = "id", required = false) Long id) {
     List<OrderInfo> orderInfos = orderService.getOrderInfo(1L);
-    return ResponseEntity.ok(orderInfos);
+    return Response.initSuccess(orderInfos);
   }
+
   @GetMapping("/ids")
   public ResponseEntity getUser(@RequestParam(value = "name", required = false) String name) {
     List<UserInfo> userInfos = List.of();
