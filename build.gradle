@@ -18,7 +18,7 @@ bootJar {
 }
 
 group = 'xyz.jecy'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 allprojects {
 
     apply plugin: 'java'
@@ -64,13 +64,16 @@ subprojects {
         options.encoding = 'UTF-8'
         options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "-Werror"
     }
+
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+    jar {
+        enabled = true
+    }
     configurations {
         providedRuntime
 
     }
-    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
-
-
     dependencies {
         compileOnly 'org.projectlombok:lombok:1.18.10'
         annotationProcessor 'org.projectlombok:lombok:1.18.10'
@@ -81,6 +84,30 @@ subprojects {
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     }
+    if (version.contains("-")) {
+        publishing {
+            publications {
+                maven(MavenPublication) {
+                    groupId 'xyz.jecy'
+                    artifactId it.name
+                    version version
+                    from components.java
+                }
+            }
+            repositories {
+                maven {
+                    credentials {
+                        username 'g0uETP'
+                        password 'mTjlwdQ55W'
+                    }
+                    def releasesRepoUrl = "https://repo.rdc.aliyun.com/repository/113197-release-J0KMpi/"
+                    def snapshotsRepoUrl = "https://repo.rdc.aliyun.com/repository/113197-snapshot-Kix4rb/"
+                    url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+                }
 
+            }
+
+        }
+    }
 }
 

@@ -2,29 +2,8 @@ plugins {
     id 'java'
     id 'maven-publish'
 }
+
+version userApiVersion
 bootJar {
     enabled = false
-}
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId 'xyz.jecy'
-            artifactId 'user-api'
-            version "${userApiVersion}"
-            from components.java
-        }
-    }
-    repositories {
-        maven {
-            credentials {
-                username 'g0uETP'
-                password 'mTjlwdQ55W'
-            }
-            def releasesRepoUrl = "https://repo.rdc.aliyun.com/repository/113197-release-J0KMpi/"
-            def snapshotsRepoUrl = "https://repo.rdc.aliyun.com/repository/113197-snapshot-Kix4rb/"
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-        }
-
-    }
-
 }
