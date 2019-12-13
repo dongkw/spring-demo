@@ -1,16 +1,6 @@
-buildscript {
-    repositories {
-        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
-        maven { url "https://plugins.gradle.org/m2/" }
-    }
-
-}
 plugins {
-    id "base"
     id "java"
-    id "io.spring.dependency-management" version "1.0.8.RELEASE"
     id "org.springframework.boot" version "2.1.9.RELEASE"
-
 }
 
 bootJar {
@@ -65,11 +55,10 @@ subprojects {
         options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "-Werror"
     }
 
-    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
-
     jar {
         enabled = true
     }
+
     configurations {
         providedRuntime
 
@@ -82,8 +71,9 @@ subprojects {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
         implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        implementation "xyz.jecy:util:${utilVersion}"
-
+        api "xyz.jecy:util:${utilVersion}"
+        api "xyz.jecy:user-api:${userApiVersion}"
+        api "xyz.jecy:order-api:${orderApiVersion}"
     }
 
 }
