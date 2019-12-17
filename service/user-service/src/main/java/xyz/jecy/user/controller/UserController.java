@@ -6,8 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import xyz.jecy.user.bean.UserInfo;
-import xyz.jecy.user.client.UserClient;
+import xyz.jecy.api.user.bean.UserInfo;
+import xyz.jecy.api.user.client.UserClient;
+
 import xyz.jecy.user.service.UserService;
 import xyz.jecy.util.response.Response;
 

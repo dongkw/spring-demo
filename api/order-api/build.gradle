@@ -9,11 +9,13 @@ version orderApiVersion
 bootJar {
     enabled = false
 }
-
+jar {
+    enabled = true
+}
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId 'xyz.jecy'
+            groupId 'xyz.jecy.api'
             artifactId "order-api"
             version version
             from components.java

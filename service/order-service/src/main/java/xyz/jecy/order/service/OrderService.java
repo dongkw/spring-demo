@@ -7,9 +7,9 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import xyz.jecy.order.bean.OrderInfo;
-import xyz.jecy.user.bean.UserInfo;
-import xyz.jecy.user.client.UserClient;
+import xyz.jecy.api.order.bean.OrderInfo;
+import xyz.jecy.api.user.client.UserClient;
+
 import xyz.jecy.util.response.Response;
 
 /**

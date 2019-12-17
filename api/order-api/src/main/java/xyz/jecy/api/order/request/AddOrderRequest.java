@@ -1,4 +1,4 @@
-package xyz.jecy.order.request;
+package xyz.jecy.api.order.request;
 
 import lombok.Data;
 

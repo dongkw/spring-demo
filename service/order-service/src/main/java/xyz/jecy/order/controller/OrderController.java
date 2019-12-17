@@ -7,10 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import xyz.jecy.order.bean.OrderInfo;
-import xyz.jecy.order.client.OrderClient;
+import xyz.jecy.api.order.bean.OrderInfo;
+import xyz.jecy.api.order.client.OrderClient;
+
+import xyz.jecy.api.user.bean.UserInfo;
 import xyz.jecy.order.service.OrderService;
-import xyz.jecy.user.bean.UserInfo;
 import xyz.jecy.util.response.Response;
 
 /**

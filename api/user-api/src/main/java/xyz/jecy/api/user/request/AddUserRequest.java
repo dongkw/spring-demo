@@ -1,4 +1,4 @@
-package xyz.jecy.user.request;
+package xyz.jecy.api.user.request;
 
 import lombok.Data;
 

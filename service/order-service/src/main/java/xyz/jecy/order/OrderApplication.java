@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 
 @SpringBootApplication
-@EnableFeignClients(basePackages = "xyz.jecy.*.client")
+@EnableFeignClients(basePackages = "xyz.jecy.api.*.client")
 @EnableDiscoveryClient
 public class OrderApplication {
 

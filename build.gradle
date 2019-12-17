@@ -9,6 +9,8 @@ bootJar {
 
 group = 'xyz.jecy'
 version = '0.0.1'
+sourceCompatibility = 9
+targetCompatibility = 9
 allprojects {
 
     apply plugin: 'java'
@@ -48,21 +50,6 @@ allprojects {
 subprojects {
     apply plugin: 'java-library'
 
-    sourceCompatibility = 9
-    targetCompatibility = 9
-    tasks.withType(JavaCompile) {
-        options.encoding = 'UTF-8'
-        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "-Werror"
-    }
-
-    jar {
-        enabled = true
-    }
-
-    configurations {
-        providedRuntime
-
-    }
     dependencies {
         compileOnly 'org.projectlombok:lombok:1.18.10'
         annotationProcessor 'org.projectlombok:lombok:1.18.10'
@@ -70,10 +57,11 @@ subprojects {
         implementation 'org.springframework.cloud:spring-cloud-config-client'
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
         implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+        implementation 'com.netflix.feign:feign-httpclient:8.18.0'
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         api "xyz.jecy:util:${utilVersion}"
-        api "xyz.jecy:user-api:${userApiVersion}"
-        api "xyz.jecy:order-api:${orderApiVersion}"
+
     }
 
 }

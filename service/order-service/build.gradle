@@ -1,8 +1,10 @@
 version '0.0.1-SNAPSHOT'
 
 dependencies {
-
+    api "xyz.jecy.api:user-api:${userApiVersion}"
+    api "xyz.jecy.api:order-api:${orderApiVersion}"
 }
+
 
 bootJar {
     mainClassName = 'xyz.jecy.order.OrderApplication'

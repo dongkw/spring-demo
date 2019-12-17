@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @data 2019/12/5 4:27 下午
  */
 @SpringBootApplication
-@EnableFeignClients(basePackages = "xyz.jecy.*.client")
+@EnableFeignClients(basePackages = {"xyz.jecy.api.*.client"})
 @EnableDiscoveryClient
 public class UserApplication {
 

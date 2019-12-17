@@ -7,10 +7,13 @@ version userApiVersion
 bootJar {
     enabled = false
 }
+jar {
+    enabled = true
+}
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId 'xyz.jecy'
+            groupId 'xyz.jecy.api'
             artifactId "user-api"
             version version
             from components.java

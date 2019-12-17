@@ -1,16 +1,16 @@
-package xyz.jecy.user.response;
+package xyz.jecy.api.order.response;
 
 import java.util.List;
 import lombok.Data;
-import xyz.jecy.user.bean.UserInfo;
+import xyz.jecy.api.order.bean.OrderInfo;
 
 /**
  * @Author dkw[dongkewei@xinzhili.cn]
  * @data 2019/12/6 3:44 下午
  */
 @Data
-public class GetUserResponse {
+public class GetOrderResponse {
 
-  private List<UserInfo> users;
+  private List<OrderInfo> users;
   private int total;
 }
