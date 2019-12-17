@@ -8,7 +8,9 @@ version utilVersion
 bootJar {
     enabled = false
 }
-
+jar {
+    enabled = true
+}
 publishing {
     publications {
         maven(MavenPublication) {
