@@ -1,6 +1,5 @@
 rootProject.name = 'spring-demo'
-include 'eureka'
-include 'config'
+include 'eureka', 'config', 'gateway'
 include 'util'
 include 'api:user-api'
 findProject(':api:user-api')?.name = 'user-api'
