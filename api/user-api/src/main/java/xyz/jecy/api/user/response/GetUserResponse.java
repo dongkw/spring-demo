@@ -2,7 +2,7 @@ package xyz.jecy.api.user.response;
 
 import java.util.List;
 import lombok.Data;
-import xyz.jecy.api.bean.UserInfo;
+import xyz.jecy.api.user.bean.UserInfo;
 
 /**
  * @Author dkw[dongkewei@xinzhili.cn]
