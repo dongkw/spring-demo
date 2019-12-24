@@ -1,11 +1,11 @@
 package xyz.jecy.util.response;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 import java.util.Objects;
 import lombok.Data;
 import xyz.jecy.util.bean.Code;
+import xyz.jecy.util.bean.ErrorCode;
 
 /**
  * @Author dkw[dongkewei@xinzhili.cn]
@@ -15,51 +15,52 @@ import xyz.jecy.util.bean.Code;
 @JsonSerialize
 public class Response<T> implements Serializable {
 
-  private static final ObjectMapper MAPPER = new ObjectMapper();
+  public static final int SUCCESS_CODE = 200;
 
-  private ResponseStatus status;
+  public static final String SUCCESS_MESSAGE = "操作成功";
+
+  private int code;
+  private String message;
   private T result;
 
 
-  private Response() {
-  }
-
-  private Response(ResponseStatus status) {
-    this.status = status;
-  }
-
-  private Response(ResponseStatus status, T result) {
-    setStatus(status);
+  private Response(int code, String message, T result) {
+    setCode(code);
+    setMessage(message);
     setResult(result);
   }
 
 
   public static <T> Response<T> initSuccess() {
-    return new Response<T>(ResponseStatus.SUCCESS);
+    return initSuccess(null);
   }
 
   public static <T> Response<T> initSuccess(T data) {
-    return new Response<T>(ResponseStatus.SUCCESS, data);
+    return new Response<T>(SUCCESS_CODE, SUCCESS_MESSAGE, data);
   }
 
   public static <T> Response<T> initError() {
-    return new Response<T>(ResponseStatus.ERROR);
+    return initError(ErrorCode.INVALID_PARAMS);
   }
 
-  private static Response<Code> initError(Code code) {
-    return new Response<Code>(ResponseStatus.ERROR, code);
+  public static <T> Response<T> initError(Code code) {
+    return new Response<T>(code.getCode(), code.getDescription(), null);
   }
 
-  public static <T> Response<T> initError(T data) {
-    return new Response<T>(ResponseStatus.ERROR, data);
+  public static <T> Response<T> initError(Code code, String message) {
+    return new Response<T>(code.getCode(), message, null);
   }
 
-  public boolean isSuccess() {
-    return Objects.equals(status, ResponseStatus.SUCCESS);
+  public boolean success() {
+    return Objects.equals(SUCCESS_CODE, code);
   }
 
-  private boolean isError() {
-    return Objects.equals(status, ResponseStatus.ERROR);
+  public boolean error() {
+    return !success();
+  }
+
+  public boolean error(Code errorCode) {
+    return Objects.equals(errorCode.getCode(), code);
   }
 
 

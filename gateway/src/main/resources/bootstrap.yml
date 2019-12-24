@@ -1,3 +1,13 @@
 server:
   port: 9999
 
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: user_route
+#          uri: http://localhost:8000
+#          predicates:
+#            - Path=/user/**
+#          filters:
+#            - StripPrefix=1

@@ -1,0 +1,10 @@
+version = '0.0.1-SNAPSHOT'
+
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
+    implementation 'org.springframework.security:spring-security-jwt'
+    api "xyz.jecy.api:user-api:${userApiVersion}"
+
+}
