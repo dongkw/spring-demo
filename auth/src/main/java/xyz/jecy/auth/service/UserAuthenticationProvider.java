@@ -9,6 +9,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 import xyz.jecy.api.user.response.UserAuthResponse;
+import xyz.jecy.auth.bean.AuthUser;
+import xyz.jecy.auth.bean.UserToken;
 import xyz.jecy.auth.util.AuthUtils;
 
 /**
@@ -30,9 +32,9 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     UserAuthResponse response = userService.getAuthResponse(userName, passWord);
     List<GrantedAuthority> authorities = AuthUtils.extractAuthorities(response);
 
-    Authentication token = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),
-        authentication.getCredentials(), authorities);
-
+    UserToken token = new UserToken(
+        authentication.getPrincipal(),
+        authentication.getCredentials(), authorities, response.getId());
     return token;
   }
 

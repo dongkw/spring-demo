@@ -3,6 +3,7 @@ package xyz.jecy.auth.bean;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import lombok.Data;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
@@ -24,14 +25,16 @@ public class MyJwtTokenEnhancer implements TokenEnhancer {
       OAuth2Authentication authentication) {
     Map<String, Object> info = new HashMap<>();
     String userId = "";
-    List<String> role = null;
+
     Authentication userAuth = authentication.getUserAuthentication();
     if (userAuth instanceof UserToken) {
-      userId = ((UserToken) userAuth).getUid();
-      role = ((UserToken) userAuth).getRole();
+      userId = ((UserToken) userAuth).getUserId();
+    } else {
+      if (userAuth.getPrincipal() instanceof AuthUser) {
+        userId = (((AuthUser) userAuth.getPrincipal()).getUserId());
+      }
     }
     info.put("userId", userId);
-    info.put("role", role);
     DefaultOAuth2AccessToken token = new DefaultOAuth2AccessToken(
         accessToken);
     token.setAdditionalInformation(info);

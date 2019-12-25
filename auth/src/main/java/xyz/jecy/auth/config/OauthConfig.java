@@ -7,17 +7,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+import xyz.jecy.auth.bean.MyJwtTokenEnhancer;
+import xyz.jecy.auth.bean.UserToken;
 import xyz.jecy.auth.service.MyUserDetailService;
 
 /**
@@ -36,6 +40,10 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
 
   @Autowired
   private MyUserDetailService userDetailService;
+
+
+  @Autowired
+  private MyJwtTokenEnhancer jwtTokenEnhancer;
 
   @Override
   public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -60,12 +68,12 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
     TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
-    enhancerChain.setTokenEnhancers(List.of(accessTokenConverter()));
+    enhancerChain.setTokenEnhancers(List.of(jwtTokenEnhancer, accessTokenConverter()));
 
     endpoints.authenticationManager(authenticationManager)
         .reuseRefreshTokens(true)
         .userDetailsService(userDetailService)
-        .tokenStore(tokenStore())
+//        .tokenStore(tokenStore())
         .tokenEnhancer(enhancerChain);
 
   }
@@ -87,6 +95,5 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
     redisTokenStore.setPrefix("auth-token:");
     return redisTokenStore;
   }
-
 
 }

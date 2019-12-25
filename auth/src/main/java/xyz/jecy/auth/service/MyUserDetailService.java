@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import xyz.jecy.api.user.response.UserAuthResponse;
+import xyz.jecy.auth.bean.AuthUser;
 import xyz.jecy.auth.util.AuthUtils;
 
 /**
@@ -25,6 +26,6 @@ public class MyUserDetailService implements UserDetailsService {
 
     UserAuthResponse response = userService.loadAuthResponse(username);
 
-    return new User("name", "", AuthUtils.extractAuthorities(response));
+    return new AuthUser("name", "", AuthUtils.extractAuthorities(response), response.getId());
   }
 }
