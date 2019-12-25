@@ -20,9 +20,7 @@ public class AuthUtils {
     return response.getRole().stream().map(t -> api(t)).collect(Collectors.toList());
   }
 
-  /**
-   * 这里可以继承GrantedAuthority自定义内容
-   */
+
   private static GrantedAuthority api(String role) {
     return new SimpleGrantedAuthority(role);
   }

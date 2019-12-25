@@ -3,13 +3,11 @@ package xyz.jecy.auth.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 import xyz.jecy.api.user.response.UserAuthResponse;
-import xyz.jecy.auth.bean.AuthUser;
 import xyz.jecy.auth.bean.UserToken;
 import xyz.jecy.auth.util.AuthUtils;
 
@@ -32,8 +30,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     UserAuthResponse response = userService.getAuthResponse(userName, passWord);
     List<GrantedAuthority> authorities = AuthUtils.extractAuthorities(response);
 
-    UserToken token = new UserToken(
-        authentication.getPrincipal(),
+    UserToken token = new UserToken(authentication.getPrincipal(),
         authentication.getCredentials(), authorities, response.getId());
     return token;
   }

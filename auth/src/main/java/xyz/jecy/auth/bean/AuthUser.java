@@ -1,7 +1,6 @@
 package xyz.jecy.auth.bean;
 
 import java.util.Collection;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
