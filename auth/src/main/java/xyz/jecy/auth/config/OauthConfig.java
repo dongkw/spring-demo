@@ -70,7 +70,7 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
     endpoints.authenticationManager(authenticationManager)
         .reuseRefreshTokens(true)
         .userDetailsService(userDetailService)
-//        .tokenStore(tokenStore())
+        .tokenStore(tokenStore())
         .tokenEnhancer(enhancerChain);
 
   }
