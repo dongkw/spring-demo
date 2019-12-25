@@ -1,6 +1,5 @@
 package xyz.jecy.auth.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -8,15 +7,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
-import xyz.jecy.api.user.client.UserClient;
-import xyz.jecy.api.user.error.UserErrorCode;
 import xyz.jecy.api.user.response.UserAuthResponse;
-import xyz.jecy.auth.bean.UserToken;
 import xyz.jecy.auth.util.AuthUtils;
-import xyz.jecy.util.exception.FailureException;
-import xyz.jecy.util.response.Response;
 
 /**
  * @Author dkw[dongkewei@xinzhili.cn]
@@ -37,10 +30,9 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     UserAuthResponse response = userService.getAuthResponse(userName, passWord);
     List<GrantedAuthority> authorities = AuthUtils.extractAuthorities(response);
 
-    UserToken token = new UserToken(authentication.getPrincipal(), authentication.getCredentials(),
-        authorities);
-    token.setUid("10086");
-    token.setRole(List.of("DOCTOR", "PATIENT"));
+    Authentication token = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),
+        authentication.getCredentials(), authorities);
+
     return token;
   }
 

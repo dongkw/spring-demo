@@ -5,6 +5,16 @@ spring:
     config:
       uri: http://localhost:8888/config
 
+public:
+  key: |-
+    -----BEGIN PUBLIC KEY-----
+    MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDf9wQAKPUI7bC68PKQ6BKUuOc
+    LXLq7QEdT526+gxTO6CzZIcvdI1AtQ3aXFM105p9P9xZAme+v68xdRiVcn2y/1mS
+    Y2KkzU9nT+GQa+sV/7i7GIoGdP+CQnoY3gySWx1U4wHXH57r/AujTT8JDSnolU2e
+    Pxz18CwTpOgrYnPUMQIDAQAB
+    -----END PUBLIC KEY-----
+
+
 server:
   port: 8000
 eureka:

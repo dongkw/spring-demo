@@ -1,6 +1,5 @@
 package xyz.jecy.auth.config;
 
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private AuthenticationProvider userAuthenticationProvider;
-    @Autowired
-    private MyUserDetailService myUserDetailService;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

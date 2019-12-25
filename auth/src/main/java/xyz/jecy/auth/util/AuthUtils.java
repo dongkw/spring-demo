@@ -1,6 +1,5 @@
 package xyz.jecy.auth.util;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,8 +17,14 @@ public class AuthUtils {
     if (CollectionUtils.isEmpty(response.getRole())) {
       return List.of();
     }
-    return response.getRole().stream().map(t -> new SimpleGrantedAuthority("ROLE_" + t))
-        .collect(Collectors.toList());
-
+    return response.getRole().stream().map(t -> api(t)).collect(Collectors.toList());
   }
+
+  /**
+   * 这里可以继承GrantedAuthority自定义内容
+   */
+  private static GrantedAuthority api(String role) {
+    return new SimpleGrantedAuthority(role);
+  }
+
 }

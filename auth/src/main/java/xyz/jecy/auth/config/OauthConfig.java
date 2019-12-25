@@ -1,13 +1,11 @@
 package xyz.jecy.auth.config;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -15,17 +13,11 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.CompositeTokenGranter;
-import org.springframework.security.oauth2.provider.TokenGranter;
-import org.springframework.security.oauth2.provider.password.ResourceOwnerPasswordTokenGranter;
-import org.springframework.security.oauth2.provider.refresh.RefreshTokenGranter;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
-import xyz.jecy.auth.bean.MyJwtTokenEnhancer;
 import xyz.jecy.auth.service.MyUserDetailService;
 
 /**
@@ -44,8 +36,6 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
 
   @Autowired
   private MyUserDetailService userDetailService;
-  @Autowired
-  private TokenEnhancer myJwtTokenEnhancer;
 
   @Override
   public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -73,17 +63,20 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
     enhancerChain.setTokenEnhancers(List.of(accessTokenConverter()));
 
     endpoints.authenticationManager(authenticationManager)
-        .reuseRefreshTokens(false)
+        .reuseRefreshTokens(true)
         .userDetailsService(userDetailService)
-//        .tokenStore(tokenStore())
+        .tokenStore(tokenStore())
         .tokenEnhancer(enhancerChain);
 
   }
 
   @Bean
   public JwtAccessTokenConverter accessTokenConverter() {
+    KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
+        new ClassPathResource("jwt.jks"), "jecyxyz".toCharArray());
     JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-    converter.setSigningKey("000000");
+    converter.setKeyPair(keyStoreKeyFactory.getKeyPair("jwt", "jecyxyz".toCharArray()));
+
     return converter;
   }
 
