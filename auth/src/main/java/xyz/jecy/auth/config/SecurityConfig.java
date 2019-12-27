@@ -36,8 +36,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/assets/**");
     }
 
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+      //在token中加入自定义的字段和角色
         auth.authenticationProvider(userAuthenticationProvider)
             .inMemoryAuthentication();
     }

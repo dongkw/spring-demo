@@ -53,23 +53,35 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
     clients.inMemory()
         .withClient("client")
         .autoApprove(true)
+
+        //设置accessToken过期时长
         .accessTokenValiditySeconds(12 * 60 * 60)
+        //设置refreshToken过期时长
         .refreshTokenValiditySeconds(7 * 24 * 60 * 60)
+        //设置secret解密模式
         .secret(new BCryptPasswordEncoder().encode("secret"))
+        //oauth2的四种模式 和刷新token
         .authorizedGrantTypes("authorization_code", "refresh_token", "implicit",
             "client_credentials", "password")
         .scopes("app", "web", "all")
+        //重定向地址
         .redirectUris("http://www.baidu.com");
 
   }
 
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+
+
     TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
+    //自定义token 第一个是加自定义字段 第二个是jwt token
     enhancerChain.setTokenEnhancers(List.of(jwtTokenEnhancer, accessTokenConverter()));
 
     endpoints.authenticationManager(authenticationManager)
+
+        //可以复用refresh_token
         .reuseRefreshTokens(true)
+        //自定义userDetailService
         .userDetailsService(userDetailService)
         .tokenStore(tokenStore())
         .tokenEnhancer(enhancerChain);
@@ -78,6 +90,7 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
 
   @Bean
   public JwtAccessTokenConverter accessTokenConverter() {
+    //用非对称加密token 生成jwt.jks 用keytool生成 以后另开文件
     KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
         new ClassPathResource("jwt.jks"), "jecyxyz".toCharArray());
     JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
@@ -89,6 +102,8 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
 
   @Bean
   public TokenStore tokenStore() {
+
+    //把token存到redis里
     RedisTokenStore redisTokenStore = new RedisTokenStore(connectionFactory);
     redisTokenStore.setPrefix("auth-token:");
     return redisTokenStore;

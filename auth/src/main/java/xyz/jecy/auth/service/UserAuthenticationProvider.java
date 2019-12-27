@@ -13,7 +13,7 @@ import xyz.jecy.auth.util.AuthUtils;
 
 /**
  * @Author dkw[dongkewei@xinzhili.cn]
- * @data 2019/12/23 2:30 下午
+ * @data 2019/12/23 2:30 下午 首次获取token通过这个类验证
  */
 @Component
 public class UserAuthenticationProvider implements AuthenticationProvider {
@@ -35,6 +35,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     return token;
   }
 
+  //如果有过个用户源 可以通过authentication来判断加载那个类
   @Override
   public boolean supports(Class<?> authentication) {
     return true;

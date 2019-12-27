@@ -19,6 +19,11 @@ import xyz.jecy.auth.bean.UserToken;
 @Component
 public class MyJwtTokenEnhancer implements TokenEnhancer {
 
+  /*
+   * 在token中加userId
+   * auth的四种模式通过自定义UserToken定义
+   * refresh_token通过自定义AuthUser实现
+   */
   @Override
   public OAuth2AccessToken enhance(OAuth2AccessToken accessToken,
       OAuth2Authentication authentication) {
