@@ -56,7 +56,8 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
         .accessTokenValiditySeconds(12 * 60 * 60)
         .refreshTokenValiditySeconds(7 * 24 * 60 * 60)
         .secret(new BCryptPasswordEncoder().encode("secret"))
-        .authorizedGrantTypes("authorization_code", "refresh_token", "password")
+        .authorizedGrantTypes("authorization_code", "refresh_token", "implicit",
+            "client_credentials", "password")
         .scopes("app", "web", "all")
         .redirectUris("http://www.baidu.com");
 
