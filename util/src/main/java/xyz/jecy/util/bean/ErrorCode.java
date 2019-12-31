@@ -1,11 +1,13 @@
 package xyz.jecy.util.bean;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * @Author dkw[dongkewei@xinzhili.cn]
  * @data 2019/12/11 10:27 上午
  */
+@Getter
 @AllArgsConstructor
 public enum ErrorCode implements Code {
   INVALID_PARAMS(400, "请求参数错误"),
@@ -23,13 +25,4 @@ public enum ErrorCode implements Code {
   private int code;
   private String description;
 
-  @Override
-  public int getCode() {
-    return 0;
-  }
-
-  @Override
-  public String getDescription() {
-    return null;
-  }
 }
