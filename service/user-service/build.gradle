@@ -5,7 +5,7 @@ dependencies {
     api "xyz.jecy.api:order-api:${orderApiVersion}"
     implementation 'org.springframework.security:spring-security-jwt'
     implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
-
+    implementation "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}"
 }
 
 bootJar {

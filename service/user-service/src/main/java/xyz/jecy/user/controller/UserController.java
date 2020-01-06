@@ -1,5 +1,8 @@
 package xyz.jecy.user.controller;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.segments.MergeSegments;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 import xyz.jecy.api.user.bean.UserInfo;
 import xyz.jecy.api.user.client.UserClient;
 import xyz.jecy.api.user.response.UserAuthResponse;
+import xyz.jecy.user.entity.User;
+import xyz.jecy.user.service.IUserService;
 import xyz.jecy.user.service.UserService;
+import xyz.jecy.user.service.impl.UserServiceImpl;
+import xyz.jecy.user.util.UserFactory;
 import xyz.jecy.util.response.Response;
 
 /**
@@ -25,9 +32,14 @@ public class UserController implements UserClient {
   @Autowired
   private UserService userService;
 
+  @Autowired
+  private IUserService iUserService;
+
   public Response getUser(@RequestParam(value = "name", required = false) String name) {
-    List<UserInfo> userInfos = userService.getUserInfo(name);
-    return Response.initSuccess(userInfos);
+
+    List<User> users = iUserService.list(UserFactory.of(name));
+
+    return Response.initSuccess(UserFactory.api(users));
   }
 
   @Override

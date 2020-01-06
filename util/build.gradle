@@ -11,6 +11,13 @@ bootJar {
 jar {
     enabled = true
 }
+
+dependencies{
+    implementation "com.baomidou:mybatis-plus-generator:${mybatisPlusVersion}"
+    implementation "mysql:mysql-connector-java:${mysqlVersion}"
+    implementation "org.apache.velocity:velocity-engine-core:${velovityVersion}"
+
+}
 publishing {
     publications {
         maven(MavenPublication) {
