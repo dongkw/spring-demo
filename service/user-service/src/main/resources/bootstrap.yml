@@ -25,3 +25,6 @@ server:
 eureka:
   instance:
     hostname: localhost
+mybatis-plus:
+  # 支持统配符 * 或者 ; 分割
+  typeEnumsPackage: xyz.jecy.api.user.bean.enums

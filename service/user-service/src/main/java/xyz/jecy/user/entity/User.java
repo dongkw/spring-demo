@@ -4,6 +4,7 @@ import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import xyz.jecy.api.user.bean.enums.Role;
 
 /**
  * <p>
@@ -29,6 +30,8 @@ public class User implements Serializable {
     private String password;
 
     private String version;
+
+    private Role role;
 
 
 

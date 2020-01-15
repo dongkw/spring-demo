@@ -5,8 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+
 
 @SpringBootApplication
+@EnableWebFluxSecurity
 public class GatewayApplication {
 
   public static void main(String[] args) {
@@ -24,9 +27,14 @@ public class GatewayApplication {
         .route(p -> p
             .path("/order/**")
             .filters(f -> f.stripPrefix(1))
-            .uri("http://127.0.0.1:8001")
-        )
+            .uri("http://127.0.0.1:8001"))
+        .route(p -> p
+            .path("/auth/**")
+            .filters(f -> f.stripPrefix(1))
+            .uri("http://127.0.0.1:9000"))
         .build();
 
   }
+
+
 }

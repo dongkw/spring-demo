@@ -1,6 +1,9 @@
 package xyz.jecy.user.config;
 
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -8,7 +11,11 @@ import org.springframework.context.annotation.Configuration;
  * @data 2019/12/31 2:35 下午
  */
 @Configuration
-@MapperScan("com.baomidou.mybatisplus.samples.quickstart.mapper")
+@MapperScan("xyz.jecy.user.mapper")
 public class MybatisPlusConfig {
 
+  @Bean
+  public Jackson2ObjectMapperBuilderCustomizer customizer(){
+    return builder -> builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
+  }
 }

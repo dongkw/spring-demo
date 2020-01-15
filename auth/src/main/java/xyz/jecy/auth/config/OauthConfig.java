@@ -1,5 +1,6 @@
 package xyz.jecy.auth.config;
 
+import java.security.KeyPair;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -72,7 +73,6 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 
-
     TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
     //自定义token 第一个是加自定义字段 第二个是jwt token
     enhancerChain.setTokenEnhancers(List.of(jwtTokenEnhancer, accessTokenConverter()));
@@ -83,22 +83,25 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
         .reuseRefreshTokens(true)
         //自定义userDetailService
         .userDetailsService(userDetailService)
-        .tokenStore(tokenStore())
+//        .tokenStore(tokenStore())
         .tokenEnhancer(enhancerChain);
 
   }
 
   @Bean
   public JwtAccessTokenConverter accessTokenConverter() {
-    //用非对称加密token 生成jwt.jks 用keytool生成 以后另开文件
-    KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
-        new ClassPathResource("jwt.jks"), "jecyxyz".toCharArray());
     JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-    converter.setKeyPair(keyStoreKeyFactory.getKeyPair("jwt", "jecyxyz".toCharArray()));
-
+    converter.setKeyPair(keyPair());
     return converter;
   }
 
+  @Bean
+  public KeyPair keyPair() {
+    //用非对称加密token 生成jwt.jks 用keytool生成
+    KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
+        new ClassPathResource("jwt.jks"), "jecyxyz".toCharArray());
+    return keyStoreKeyFactory.getKeyPair("jwt", "jecyxyz".toCharArray());
+  }
 
   @Bean
   public TokenStore tokenStore() {

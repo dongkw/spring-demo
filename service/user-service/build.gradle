@@ -6,6 +6,8 @@ dependencies {
     implementation 'org.springframework.security:spring-security-jwt'
     implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
     implementation "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}"
+    implementation "mysql:mysql-connector-java:${mysqlVersion}"
+
 }
 
 bootJar {

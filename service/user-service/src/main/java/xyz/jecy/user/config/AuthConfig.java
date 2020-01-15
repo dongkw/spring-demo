@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
  * @Author dkw[dongkewei@xinzhili.cn]
  * @data 2019/12/20 10:10 上午
  */
-
+//
 @Configuration
 @EnableResourceServer
 public class AuthConfig extends ResourceServerConfigurerAdapter {
@@ -29,6 +29,7 @@ public class AuthConfig extends ResourceServerConfigurerAdapter {
   public void configure(HttpSecurity http) throws Exception {
     http
         .authorizeRequests()
+        .antMatchers("/**").permitAll()
         .antMatchers("/user/auth").permitAll()
         .antMatchers("/user/load").permitAll()
         .anyRequest().authenticated();
