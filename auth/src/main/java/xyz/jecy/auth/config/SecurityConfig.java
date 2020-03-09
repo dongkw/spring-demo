@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import xyz.jecy.auth.service.UserAuthenticationProvider2;
+import xyz.jecy.auth.service.UserAuthenticationProvider3;
 
 @Configuration
 @EnableWebSecurity
@@ -19,6 +21,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private AuthenticationProvider userAuthenticationProvider;
+    @Autowired
+    private UserAuthenticationProvider2 userAuthenticationProvider2;
+    @Autowired
+    private UserAuthenticationProvider3 userAuthenticationProvider3;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -41,6 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
       //在token中加入自定义的字段和角色
         auth.authenticationProvider(userAuthenticationProvider)
+            .authenticationProvider(userAuthenticationProvider2)
+            .authenticationProvider(userAuthenticationProvider3)
             .inMemoryAuthentication();
     }
 
