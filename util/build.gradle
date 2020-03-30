@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'java-gradle-plugin'
 }
 
 version utilVersion
@@ -12,7 +13,17 @@ jar {
     enabled = true
 }
 
-dependencies{
+gradlePlugin {
+    plugins {
+        generator {
+            id = "xyz.jecy.plugins.build"
+            implementationClass = 'xyz.jecy.plugins.MyBuild'
+        }
+    }
+
+}
+
+dependencies {
     implementation "com.baomidou:mybatis-plus-generator:${mybatisPlusVersion}"
     implementation "mysql:mysql-connector-java:${mysqlVersion}"
     implementation "org.apache.velocity:velocity-engine-core:${velovityVersion}"
@@ -41,3 +52,4 @@ publishing {
     }
 
 }
+

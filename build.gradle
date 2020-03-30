@@ -17,7 +17,6 @@ allprojects {
     apply plugin: 'idea'
     apply plugin: "org.springframework.boot"
     apply plugin: 'io.spring.dependency-management'
-
     dependencyManagement {
         imports {
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:Greenwich.SR3"
@@ -48,11 +47,15 @@ allprojects {
             url 'https://repo.rdc.aliyun.com/repository/113197-snapshot-Kix4rb/'
         }
     }
+    dependencies {
 
+    }
 
 }
 
 subprojects {
+
+
     apply plugin: 'java-library'
 
     dependencies {
@@ -65,16 +68,14 @@ subprojects {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
         implementation 'org.springframework.boot:spring-boot-starter-data-redis'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
     }
     if (it.name != "util") {
         dependencies {
             api "xyz.jecy:util:${utilVersion}"
         }
+
     }
-
-
-
-
 
 
 }

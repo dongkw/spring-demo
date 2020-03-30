@@ -39,7 +39,7 @@ public class GeneratorService {
         .setInclude(tableNames);//修改替换成你需要的表名，多个表名传数组
     config.setActiveRecord(false)
         .setAuthor("kw")
-        .setOutputDir("service/user-service/src/main/java/")
+        .setOutputDir("src/main/java/")
         .setFileOverride(false);
 
     if (!serviceNameStartWithI) {

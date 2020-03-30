@@ -1,9 +1,11 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'java-gradle-plugin'
 }
 
-version userApiVersion
+version pluginsVersion
+
 bootJar {
     enabled = false
 }
@@ -11,15 +13,25 @@ jar {
     enabled = true
 }
 
-dependencies {
-
-    implementation "com.baomidou:mybatis-plus-annotation:${mybatisPlusVersion}"
+gradlePlugin {
+    plugins {
+        generator {
+            id = "ServerEnvironmentPlugin"
+            implementationClass = 'xyz.jecy.plugins.BinaryRepositoryVersionPlugin'
+        }
+    }
 }
+
+dependencies {
+    compile group: 'redis.clients', name: 'jedis', version: '2.8.0'
+}
+
+
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId 'xyz.jecy.api'
-            artifactId "user-api"
+            groupId 'xyz.jecy'
+            artifactId "plugins"
             version version
             from components.java
         }
@@ -37,6 +49,5 @@ publishing {
 
     }
 
-
-
 }
+

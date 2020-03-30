@@ -1,24 +1,17 @@
 package xyz.jecy.user.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.segments.MergeSegments;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import xyz.jecy.api.user.bean.UserInfo;
 import xyz.jecy.api.user.client.UserClient;
 import xyz.jecy.api.user.response.UserAuthResponse;
 import xyz.jecy.user.entity.User;
 import xyz.jecy.user.service.IUserService;
 import xyz.jecy.user.service.UserService;
-import xyz.jecy.user.service.impl.UserServiceImpl;
 import xyz.jecy.user.util.UserFactory;
 import xyz.jecy.util.response.Response;
 

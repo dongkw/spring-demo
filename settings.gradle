@@ -1,3 +1,27 @@
+pluginManagement {
+
+    repositories {
+        maven {
+            credentials {
+                username 'g0uETP'
+                password 'mTjlwdQ55W'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/113197-release-J0KMpi/'
+        }
+        maven {
+            credentials {
+                username 'g0uETP'
+                password 'mTjlwdQ55W'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/113197-snapshot-Kix4rb/'
+        }
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        mavenCentral()
+    }
+
+}
+
 rootProject.name = 'spring-demo'
 include 'eureka', 'config', 'gateway', 'auth'
 include 'util'
@@ -9,3 +33,5 @@ include 'service:user-service'
 findProject(':service:user-service')?.name = 'user-service'
 include 'service:order-service'
 findProject(':service:order-service')?.name = 'order-service'
+include 'plugins'
+
