@@ -11,13 +11,15 @@ public class BinaryRepositoryVersionPlugin implements Plugin<Project> {
     BinaryRepositoryExtension extension = project.getExtensions()
         .create("binaryRepo", BinaryRepositoryExtension.class, project);
 
-    project.getPlugins().apply(PublishingPlugin.class);
     project.getTasks().register("latestArtifactVersion", LatestArtifactVersion.class,
         new Action<LatestArtifactVersion>() {
+
           public void execute(LatestArtifactVersion latestArtifactVersion) {
+//            project.setVersion(extension.getServerUrl());
             latestArtifactVersion.getServerUrl().set(extension.getServerUrl());
           }
         });
+//    project.getGradle().getTaskGraph().addTaskExecutionGraphListener(new ReleaseVersionListener());
 
 
   }

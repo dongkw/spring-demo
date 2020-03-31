@@ -1,5 +1,5 @@
 plugins {
-    id "ServerEnvironmentPlugin" version "20200330-SNAPSHOT"
+    id "ServerEnvironmentPlugin" version "20200331-4-SNAPSHOT"
 }
 
 binaryRepo {
