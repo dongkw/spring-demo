@@ -1,21 +1,63 @@
 plugins {
-    id "ServerEnvironmentPlugin" version "20200331-4-SNAPSHOT"
+    id "QuotePlugin" version "20200408-4-SNAPSHOT"
 }
 
-binaryRepo {
-    serverUrl = 'userService'
-}
 
 version '0.0.1-SNAPSHOT'
 
 dependencies {
-    api "xyz.jecy.api:user-api:${userApiVersion}"
+    api "xyz.jecy.api:user-api"
     api "xyz.jecy.api:order-api:${orderApiVersion}"
     implementation 'org.springframework.security:spring-security-jwt'
     implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
     implementation "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}"
     implementation "mysql:mysql-connector-java:${mysqlVersion}"
 }
+
+//build.dependsOn quote11
+
+//bootJar {
+//    mainClassName = 'xyz.jecy.user.UserApplication'
+//}
+
+
+//task t1 {
+//    DependencyHandler dependencyHandler = project.getDependencies()
+//    Map a = dependencyHandler.getProperties();
+//
+//    ConfigurationContainer c= project.getConfigurations()
+////    DefaultConfiguration defaultConfiguration=c.getByName("api")
+//
+//
+//   println defaultConfiguration.getDependencies();
+//
+//}
+
+//task qqqq {
+//
+//
+//    DependencyHandler dependencyHandler = project.getDependencies()
+//    ConfigurationContainer configurations = project.getConfigurations();
+//    try {
+//        Configuration configuration = configurations.getByName("api");
+////    DependencySet dependencies1 = configuration.getAllDependencies();
+//
+//
+////    dependencyHandler.add("api","xyz.jecy.api:user-api:${userApiVersion}")
+////    dependencies1.removeIf({ t -> t.getName() == "user-api" })
+//        dependencyHandler.add("api","xyz.jecy.api:user-api:${userApiVersion}")
+////    dependencyHandler.add("api","xyz.jecy.api:user-api:${userApiVersion}")
+//
+//
+//        println configuration.getDependencies()
+//    }catch(Exception e){
+//        println "llla"
+//    }
+//
+//
+//}
+//
+//
 
 
 bootJar {

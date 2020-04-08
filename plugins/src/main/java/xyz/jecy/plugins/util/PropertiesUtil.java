@@ -1,18 +1,12 @@
 package xyz.jecy.plugins.util;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import org.gradle.api.Project;
 
 /**
  * @Author dkw[dongkewei@xinzhili.cn]
@@ -22,7 +16,6 @@ public class PropertiesUtil {
 
 
   private static final String PLACE = "-";
-
 
 
   private static Path getPath(String fileName) {
@@ -36,7 +29,7 @@ public class PropertiesUtil {
     return path;
   }
 
-  public static void handler(Project project, String serviceName) {
+  public static void handler(String serviceName) {
 
     Path path = getPath("gradle.properties");
     List<String> list = null;
@@ -49,7 +42,6 @@ public class PropertiesUtil {
       if (t.contains(serviceName)) {
         String[] s = t.split("=");
         String version = nextVersion(s[1]);
-        project.setVersion(version);
         return s[0] + "=" + version;
       }
       return t;
@@ -61,7 +53,17 @@ public class PropertiesUtil {
     }
   }
 
-  public static void write() {
+  public static String getVersion(String serviceName) {
+    Path path = getPath("gradle.properties");
+    List<String> list = null;
+    try {
+      list = Files.readAllLines(path);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return list.stream().filter(t -> t.contains(serviceName))
+        .map(m -> m.split("=")[1]).findFirst().get();
+
   }
 
 

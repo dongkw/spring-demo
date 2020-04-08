@@ -2,9 +2,16 @@ plugins {
     id 'java'
     id 'maven-publish'
     id 'java-gradle-plugin'
-}
+    id "ServerEnvironmentPlugin" version "20200403-50-SNAPSHOT"
 
+}
+binaryRepo {
+    serverUrl = 'utilVersion'
+}
 version utilVersion
+
+depend.dependsOn latestArtifactVersion
+publish.dependsOn depend
 
 bootJar {
     enabled = false

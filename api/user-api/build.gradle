@@ -1,15 +1,18 @@
 plugins {
     id 'java'
     id 'maven-publish'
-    id "ServerEnvironmentPlugin" version "20200331-10-SNAPSHOT"
+    id "ServerEnvironmentPlugin" version "20200403-50-SNAPSHOT"
 
 }
 binaryRepo {
     serverUrl = 'userApiVersion'
 }
 
-publish.dependsOn latestArtifactVersion
+depend.dependsOn latestArtifactVersion
+publish.dependsOn depend
+
 version userApiVersion
+
 bootJar {
     enabled = false
 }
@@ -21,12 +24,14 @@ dependencies {
 
     implementation "com.baomidou:mybatis-plus-annotation:${mybatisPlusVersion}"
 }
+
+
 publishing {
     publications {
         maven(MavenPublication) {
             groupId 'xyz.jecy.api'
             artifactId "user-api"
-            version version
+            version userApiVersion
             from components.java
         }
     }
@@ -43,3 +48,103 @@ publishing {
 
     }
 }
+
+
+//publishMavenPublicationToMavenRepository.dependsOn latestArtifactVersion
+//
+//publishMavenPublicationToMavenLocal.dependsOn latestArtifactVersion
+//publishToMavenLocal.dependsOn latestArtifactVersion
+
+//version = new ProjectVersion(0, 1)
+
+//class ProjectVersion {
+//    Integer major
+//    Integer minor
+//
+//    ProjectVersion(Integer major, Integer minor) {
+//        this.major = major
+//        this.minor = minor
+//    }
+//
+//    @Override
+//    String toString() {
+//        "$major.$minor"
+//    }
+//}
+//
+//
+//task printVersion {
+//
+//    println "version:$version"
+//    doFirst {
+//
+//        println "version1:$version"
+//
+//    }
+//
+//}
+//ext.versionFile = file('version.properties')
+//
+//task loadVersion {
+//    project.version = readVersion()
+//}
+//
+//ProjectVersion readVersion() {
+//    logger.quiet("read file")
+//    Properties versionProp = new Properties()
+//    versionFile.withInputStream {
+//        s -> versionProp.load(s)
+//    }
+//
+//    new ProjectVersion(versionProp.major.toInteger(), versionProp.minor.toInteger())
+//
+//}
+
+////--------------------------
+//task reVersion{} //version+1
+//
+//task publishApi{} //publish
+//
+//publishApi.dependsOn reVersion 手动发包
+//
+//task buildDependencies{} // 与git操作绑定 把项目当前的版本号发布到仓库
+//
+////---------------------------
+//task reDependencies{} // 从版本库同步最新版本  build依赖此插件
+//
+//task buildDocker{}
+//
+//task restartService{} //分环境
+////---------------------------
+
+task dep11 {
+    doLast {
+        PublishingExtension extension = project.getExtensions().findByType(PublishingExtension);
+        MavenPublication mavenPublication = extension.publications.findByName("maven")
+
+
+        mavenPublication.version("1111")
+        println mavenPublication.version
+        println "++++名字：" + (project.hasProperty('env') ? project.getProperties().get("env") : "1111111")
+    }
+}
+
+//task qqqq {
+//
+////    ConfigurationContainer configurations=project.getConfigurations();
+////    Configuration configuration=configurations.getByName("api");
+////    println configuration.getDependencies();
+//
+//    DependencyHandler dependencyHandler = project.getDependencies()
+//    ConfigurationContainer configurations = project.getConfigurations();
+//    Configuration configuration = configurations.getByName("api");
+//    DependencySet dependencies1 = configuration.getAllDependencies();
+//    println dependencies1
+//
+//    println dependencies1.find()
+//    println dependencies1
+//    doLast {
+//        println dependencies1
+//
+//    }
+//}

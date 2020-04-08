@@ -15,9 +15,13 @@ jar {
 
 gradlePlugin {
     plugins {
-        generator {
+        myApi {
             id = "ServerEnvironmentPlugin"
-            implementationClass = 'xyz.jecy.plugins.BinaryRepositoryVersionPlugin'
+            implementationClass = 'xyz.jecy.plugins.api.BinaryRepositoryVersionPlugin'
+        }
+        myServer {
+            id = "QuotePlugin"
+            implementationClass = 'xyz.jecy.plugins.server.QuotePlugin'
         }
     }
 }
