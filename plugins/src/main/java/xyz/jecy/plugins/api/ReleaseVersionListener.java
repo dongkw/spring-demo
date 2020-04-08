@@ -17,8 +17,6 @@ import xyz.jecy.plugins.util.PropertiesUtil;
 public class ReleaseVersionListener implements TaskExecutionGraphListener {
 
   private static final String PATH = ":latestArtifactVersion";
-  private static final String QUOTE_PATH = ":quote11";
-
 
   @Override
   public void graphPopulated(TaskExecutionGraph graph) {

@@ -2,6 +2,8 @@ package xyz.jecy.plugins.api;
 
 import org.gradle.api.DefaultTask;
 import org.gradle.api.provider.Property;
+import org.gradle.api.publish.PublishingExtension;
+import org.gradle.api.publish.maven.MavenPublication;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 import redis.clients.jedis.Jedis;
@@ -33,10 +35,16 @@ public class DependenciesTask extends DefaultTask {
   @TaskAction
   public void setDependencies() {
 
+    PublishingExtension extension = getProject().getExtensions()
+        .getByType(PublishingExtension.class);
+    MavenPublication mavenPublication = (MavenPublication) extension.getPublications()
+        .findByName("maven");
+
     RedisUtil redisUtil = new RedisUtil();
     Jedis jedis = redisUtil.getJedis();
     getLogger().quiet(env.get());
-    jedis.hset(env.get(), getProject().getName(), PropertiesUtil.getVersion(serverUrl.get()));
+    jedis.hset(env.get(), mavenPublication.getArtifactId(),
+        PropertiesUtil.getVersion(serverUrl.get()));
     jedis.close();
   }
 

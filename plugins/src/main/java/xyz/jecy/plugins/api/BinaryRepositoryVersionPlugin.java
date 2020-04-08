@@ -4,6 +4,7 @@ import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import xyz.jecy.plugins.BinaryRepositoryExtension;
+import xyz.jecy.plugins.util.PropertyUtil;
 
 public class BinaryRepositoryVersionPlugin implements Plugin<Project> {
 
@@ -11,12 +12,8 @@ public class BinaryRepositoryVersionPlugin implements Plugin<Project> {
     BinaryRepositoryExtension extension = project.getExtensions()
         .create("binaryRepo", BinaryRepositoryExtension.class, project);
 
-    extension.getServerUrl()
-        .set(project.hasProperty("serverUrl") ? project.getProperties().get("serverUrl").toString()
-            : "version");
-    extension.getEnv()
-        .set(project.hasProperty("env") ? project.getProperties().get("env").toString()
-            : "dev");
+    extension.getServerUrl().set(PropertyUtil.getServerUrl(project));
+    extension.getEnv().set(PropertyUtil.getEnv(project));
 
     ReleaseVersionListener listener = new ReleaseVersionListener();
     project.getGradle().getTaskGraph().addTaskExecutionGraphListener(listener);
