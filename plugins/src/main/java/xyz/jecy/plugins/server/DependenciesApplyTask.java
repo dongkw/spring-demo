@@ -16,7 +16,6 @@ public class DependenciesApplyTask extends DefaultTask {
     DependencyUtil.setDependency(getProject());
   }
 
-
   @Input
   public Property<String> getEnv() {
     return env;

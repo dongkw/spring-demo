@@ -1,7 +1,6 @@
 package xyz.jecy.plugins.api;
 
 import java.util.List;
-import lombok.Data;
 import org.gradle.api.Task;
 import org.gradle.api.execution.TaskExecutionGraph;
 import org.gradle.api.execution.TaskExecutionGraphListener;
@@ -13,7 +12,6 @@ import xyz.jecy.plugins.util.PropertiesUtil;
  * @Author dkw[dongkewei@xinzhili.cn]
  * @data 2020/3/31 3:08 下午
  */
-@Data
 public class ReleaseVersionListener implements TaskExecutionGraphListener {
 
   private static final String PATH = ":latestArtifactVersion";
@@ -27,7 +25,6 @@ public class ReleaseVersionListener implements TaskExecutionGraphListener {
       if (t.getPath().endsWith(PATH)) {
         LatestArtifactVersion l = (LatestArtifactVersion) t;
         String version = PropertiesUtil.getVersion(l.getServerUrl().get());
-        PropertiesUtil.handler(l.getServerUrl().get());
         t.getProject().setVersion(PropertiesUtil.nextVersion(version));
         PublishingExtension extension = l.getProject().getExtensions()
             .getByType(PublishingExtension.class);
@@ -37,7 +34,6 @@ public class ReleaseVersionListener implements TaskExecutionGraphListener {
       }
 
     });
-
 
   }
 }

@@ -4,6 +4,7 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
+import xyz.jecy.plugins.util.PropertiesUtil;
 
 public class LatestArtifactVersion extends DefaultTask {
 
@@ -13,15 +14,15 @@ public class LatestArtifactVersion extends DefaultTask {
     serverUrl = getProject().getObjects().property(String.class);
   }
 
-
   @Input
   public Property<String> getServerUrl() {
     return serverUrl;
   }
 
-
   @TaskAction
   public void resolveLatestVersion() {
+
+    PropertiesUtil.handler(getServerUrl().get());
 
   }
 

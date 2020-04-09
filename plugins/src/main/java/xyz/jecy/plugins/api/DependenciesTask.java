@@ -21,7 +21,6 @@ public class DependenciesTask extends DefaultTask {
     env = getProject().getObjects().property(String.class);
   }
 
-
   @Input
   public Property<String> getServerUrl() {
     return serverUrl;
