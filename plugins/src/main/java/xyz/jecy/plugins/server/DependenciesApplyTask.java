@@ -13,6 +13,7 @@ public class DependenciesApplyTask extends DefaultTask {
 
   public DependenciesApplyTask() {
     env = getProject().getObjects().property(String.class);
+    System.out.println("111:"+env);
     DependencyUtil.setDependency(getProject());
   }
 

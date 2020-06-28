@@ -11,6 +11,7 @@ import org.gradle.api.Task;
 public class PropertyUtil {
 
   public static String getEnv(Project project) {
+    System.out.println("env"+project.hasProperty("env"));
 
     return project.hasProperty("env") ?
         project.getProperties().get("env").toString() : "dev";
@@ -18,7 +19,6 @@ public class PropertyUtil {
   }
 
   public static String getServerUrl(Project project) {
-
     return project.hasProperty("serverUrl") ?
         project.getProperties().get("serverUrl").toString() : "version";
 

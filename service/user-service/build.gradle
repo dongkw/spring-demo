@@ -1,12 +1,7 @@
-plugins {
-    id "QuotePlugin" version "20200408-5-SNAPSHOT"
-}
-
-
 version '0.0.1-SNAPSHOT'
 
 dependencies {
-    api "xyz.jecy.api:user-api"
+    api "xyz.jecy.api:user-api:${userApiVersion}"
     api "xyz.jecy.api:order-api:${orderApiVersion}"
     implementation 'org.springframework.security:spring-security-jwt'
     implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'

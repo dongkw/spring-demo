@@ -1,6 +1,7 @@
 pluginManagement {
-
     repositories {
+        mavenLocal()
+
         maven {
             credentials {
                 username 'g0uETP'
@@ -26,7 +27,7 @@ rootProject.name = 'spring-demo'
 include 'eureka', 'config', 'gateway', 'auth'
 include 'util'
 include 'api:user-api'
-findProject(':api:user-api')?.name = 'user-api'
+//findProject(':api:user-api')?.name = 'user-api'
 include 'api:order-api'
 findProject(':api:order-api')?.name = 'order-api'
 include 'service:user-service'

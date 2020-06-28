@@ -3,13 +3,16 @@ package xyz.jecy.plugins.server;
 import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import xyz.jecy.plugins.BinaryRepositoryExtension;
 import xyz.jecy.plugins.util.PropertyUtil;
 
 public class QuotePlugin implements Plugin<Project> {
 
   public void apply(Project project) {
 
-    String env = PropertyUtil.getEnv(project);
+//    String env = PropertyUtil.getEnv(project);
+    BinaryRepositoryExtension extension = project.getExtensions()
+        .create("binaryRepo", BinaryRepositoryExtension.class, project);
 
 //
     QuoteListener listener = new QuoteListener();
@@ -19,7 +22,7 @@ public class QuotePlugin implements Plugin<Project> {
         .register("quote11", DependenciesApplyTask.class, new Action<DependenciesApplyTask>() {
           @Override
           public void execute(DependenciesApplyTask dependenciesApplyTask) {
-            dependenciesApplyTask.getEnv().set(env);
+            dependenciesApplyTask.getEnv().set(extension.getEnv());
           }
         });
   }
