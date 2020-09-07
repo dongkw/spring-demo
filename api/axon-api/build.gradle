@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+version axonApiVersion
+
+
+bootJar {
+    enabled = false
+}
+jar {
+    enabled = true
+}
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId 'xyz.jecy.api'
+            artifactId "axon-api"
+            version version
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            credentials {
+                username 'g0uETP'
+                password 'mTjlwdQ55W'
+            }
+            def releasesRepoUrl = "https://repo.rdc.aliyun.com/repository/113197-release-J0KMpi/"
+            def snapshotsRepoUrl = "https://repo.rdc.aliyun.com/repository/113197-snapshot-Kix4rb/"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        }
+
+    }
+
+}

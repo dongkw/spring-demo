@@ -1,15 +1,8 @@
 plugins {
     id 'java'
     id 'maven-publish'
-    id "ServerEnvironmentPlugin" version "20200403-50-SNAPSHOT"
 
 }
-binaryRepo {
-    serverUrl = 'userApiVersion'
-}
-
-depend.dependsOn latestArtifactVersion
-publish.dependsOn depend
 
 version userApiVersion
 

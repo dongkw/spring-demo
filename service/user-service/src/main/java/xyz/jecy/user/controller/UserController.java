@@ -2,6 +2,8 @@ package xyz.jecy.user.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,7 @@ import xyz.jecy.util.response.Response;
  * @data 2019/12/6 4:47 下午
  */
 @RestController
+@Slf4j
 public class UserController implements UserClient {
 
   @Autowired

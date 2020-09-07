@@ -3,6 +3,7 @@ plugins {
     id "org.springframework.boot" version "2.1.9.RELEASE"
     //    id "ServerEnvironmentPlugin" version "20200403-41-SNAPSHOT"
 
+
 }
 
 bootJar {
@@ -11,8 +12,8 @@ bootJar {
 
 group = 'xyz.jecy'
 version = '0.0.1'
-sourceCompatibility = 9
-targetCompatibility = 9
+sourceCompatibility = 11
+targetCompatibility = 11
 allprojects {
 
     apply plugin: 'java'
@@ -71,7 +72,10 @@ subprojects {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
         implementation 'org.springframework.boot:spring-boot-starter-data-redis'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
+        implementation("org.axonframework:axon-spring-boot-starter:${axonVersion}")
+//        implementation("org.axonframework:axon-distributed-commandbus-springcloud:4.0-M2")
+        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+        implementation("com.h2database:h2")
     }
     if (it.name != "util") {
         dependencies {
