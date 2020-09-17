@@ -1,17 +1,17 @@
 plugins {
     id 'java'
     id 'maven-publish'
-    id 'java-gradle-plugin'
-    id "ServerEnvironmentPlugin" version "20200403-50-SNAPSHOT"
+//    id 'java-gradle-plugin'
+//    id "ServerEnvironmentPlugin" version "20200403-50-SNAPSHOT"
 
 }
-binaryRepo {
-    serverUrl = 'utilVersion'
-}
-version utilVersion
-
-depend.dependsOn latestArtifactVersion
-publish.dependsOn depend
+//binaryRepo {
+//    serverUrl = 'utilVersion'
+//}
+//version utilVersion
+//
+//depend.dependsOn latestArtifactVersion
+//publish.dependsOn depend
 
 bootJar {
     enabled = false
@@ -20,15 +20,15 @@ jar {
     enabled = true
 }
 
-gradlePlugin {
-    plugins {
-        generator {
-            id = "xyz.jecy.plugins.build"
-            implementationClass = 'xyz.jecy.plugins.MyBuild'
-        }
-    }
-
-}
+//gradlePlugin {
+//    plugins {
+//        generator {
+//            id = "xyz.jecy.plugins.build"
+//            implementationClass = 'xyz.jecy.plugins.MyBuild'
+//        }
+//    }
+//
+//}
 
 dependencies {
     implementation "com.baomidou:mybatis-plus-generator:${mybatisPlusVersion}"

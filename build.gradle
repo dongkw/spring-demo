@@ -12,8 +12,8 @@ bootJar {
 
 group = 'xyz.jecy'
 version = '0.0.1'
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 allprojects {
 
     apply plugin: 'java'
@@ -79,7 +79,7 @@ subprojects {
     }
     if (it.name != "util") {
         dependencies {
-            api "xyz.jecy:util:${utilVersion}"
+            implementation project(":util")
         }
 
     }

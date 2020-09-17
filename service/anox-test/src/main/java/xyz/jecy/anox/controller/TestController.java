@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import xyz.jecy.anox.api.bean.CapitalAddCmd;
-
-import xyz.jecy.anox.api.bean.CapitalCreatCmd;
+import xyz.jecy.api.axon.bean.cmd.CapitalAddCmd;
+import xyz.jecy.api.axon.bean.cmd.CapitalCreatCmd;
+import xyz.jecy.api.axon.bean.cmd.CapitalSubtractCmd;
+import xyz.jecy.api.axon.bean.cmd.TransferCmd;
 import xyz.jecy.util.response.Response;
+
+import java.util.UUID;
 
 
 /**
@@ -33,6 +36,18 @@ public class TestController {
 
     @PostMapping("capital/add")
     public Response addCapital(@RequestBody CapitalAddCmd cmd) {
+        commandGateway.send(cmd);
+        return Response.initSuccess();
+    }
+    @PostMapping("capital/subtract")
+    public Response subtractCapital(@RequestBody CapitalSubtractCmd cmd) {
+        commandGateway.send(cmd);
+        return Response.initSuccess();
+    }
+    @PostMapping("capital/transfer")
+    public Response transfer(@RequestBody TransferCmd cmd) {
+        UUID s = UUID.randomUUID();
+        cmd.setTransferId(s.toString());
         commandGateway.send(cmd);
         return Response.initSuccess();
     }

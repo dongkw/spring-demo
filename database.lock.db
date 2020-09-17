@@ -1,6 +1,6 @@
 #FileLock
-#Mon Sep 07 11:35:50 CST 2020
-server=169.254.175.32\:50457
+#Fri Sep 11 16:52:15 CST 2020
 hostName=cyy-PC
+id=1747c5d71a4c52661d2d583969d06d1e4bbb5e30065
 method=file
-id=17466a25437bcefe485816bfd483c2f698984c705c5
+server=169.254.175.32\:53404

@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: anox-test-query
+  cloud:
+    config:
+      uri: http://localhost:8888/config
+  datasource:
+    url: jdbc:h2:./database;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: true
+server:
+  port: 8091
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    enabled: false
+axon:
+  axonserver:
+    servers: localhost
+  distributed:
+    enabled: true

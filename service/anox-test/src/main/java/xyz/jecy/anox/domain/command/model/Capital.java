@@ -4,16 +4,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.CommandHandler;
+import org.axonframework.eventhandling.EventHandler;
+import org.axonframework.eventhandling.gateway.EventGateway;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
+import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
-import xyz.jecy.anox.api.bean.CapitalAddCmd;
-import xyz.jecy.anox.api.bean.CapitalAddEvt;
-import xyz.jecy.anox.api.bean.CapitalCreatCmd;
-import xyz.jecy.anox.api.bean.CapitalCreateEvt;
 
-
-import static org.axonframework.modelling.command.AggregateLifecycle.apply;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import xyz.jecy.api.axon.bean.cmd.*;
+import xyz.jecy.api.axon.bean.evt.*;
 
 
 /**
@@ -34,13 +35,29 @@ public class Capital {
     @CommandHandler
     public Capital(CapitalCreatCmd cmd) {
         log.info("创建资金:{}", cmd);
-        apply(new CapitalCreateEvt(cmd.getId(), cmd.getAmount()));
+        AggregateLifecycle.apply(new CapitalCreateEvt(cmd.getId(), cmd.getAmount()));
     }
 
     @CommandHandler
     public void handler(CapitalAddCmd cmd) {
         log.info("加钱cmd:{}", cmd);
-        apply(new CapitalAddEvt(cmd.getId(), cmd.getAmount()));
+        AggregateLifecycle.apply(new CapitalAddEvt(cmd.getId(), cmd.getAmount()));
+    }
+
+    @CommandHandler
+    public void handler(CapitalSubtractCmd cmd) {
+        log.info("一共有{},减{},{}",balance,cmd.getAmount(),cmd);
+        if (balance < cmd.getAmount()) {
+            AggregateLifecycle.apply(new NotEnoughEvt(id));
+        } else {
+            AggregateLifecycle.apply(new CapitalSubtractEvt(cmd.getId(), cmd.getAmount()));
+        }
+    }
+
+    @EventSourcingHandler
+    public void on(CapitalSubtractEvt evt) {
+        log.info("减钱evt：{}", evt);
+        balance -= evt.getAmount();
     }
 
     @EventSourcingHandler

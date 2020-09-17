@@ -8,6 +8,7 @@ import org.axonframework.modelling.command.Repository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import xyz.jecy.anox.domain.command.model.Capital;
+import xyz.jecy.anox.domain.command.model.Transfer;
 
 /**
  * @Author dongkw
@@ -22,7 +23,13 @@ public class CommandConfig {
                 .eventStore(eventStore)
                 .build();
     }
-
+    @Bean
+    public Repository<Transfer> TransferRepository(EventStore eventStore, Cache cache) {
+        return EventSourcingRepository.builder(Transfer.class)
+                .cache(cache)
+                .eventStore(eventStore)
+                .build();
+    }
     @Bean
     public Cache cache() {
         return new WeakReferenceCache();

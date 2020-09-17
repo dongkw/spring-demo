@@ -2,14 +2,14 @@ package xyz.jecy.anox.domain.query;
 
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.eventhandling.EventHandler;
-import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import xyz.jecy.anox.api.bean.CapitalAddEvt;
-import xyz.jecy.anox.api.bean.CapitalCreateEvt;
-import xyz.jecy.anox.repository.CapitalEntityRepository;
 
-import java.util.function.Consumer;
+import xyz.jecy.anox.repository.CapitalEntityRepository;
+import xyz.jecy.api.axon.bean.evt.CapitalAddEvt;
+import xyz.jecy.api.axon.bean.evt.CapitalCreateEvt;
+import xyz.jecy.api.axon.bean.evt.CapitalSubtractEvt;
+
 
 /**
  * @Author dongkw
@@ -38,6 +38,15 @@ public class CapitalListener {
 
 
     }
+    @EventHandler
+    public void on(CapitalSubtractEvt evt) {
+        CapitalEntry entry = capitalRepository.findOneByAxonCapitalId(evt.getId());
+        log.info("这边改之前：{}",entry);
+        entry.setBalance(entry.getBalance() - evt.getAmount());
+        capitalRepository.save(entry);
+        log.info("这边改之后：{}",entry);
 
+
+    }
 
 }

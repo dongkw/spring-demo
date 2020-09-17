@@ -1,0 +1,18 @@
+plugins {
+}
+version '0.0.1-SNAPSHOT'
+
+dependencies {
+    implementation project(":api:axon-api")
+    implementation("io.springfox:springfox-swagger-ui:${swaggerVersion}")
+    implementation("io.springfox:springfox-swagger2:${swaggerVersion}")
+
+}
+
+
+bootJar {
+    mainClassName = 'xyz.jecy.order.AnoxQueryApplication'
+}
+repositories {
+    mavenCentral()
+}

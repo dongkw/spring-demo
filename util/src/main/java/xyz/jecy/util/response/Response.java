@@ -28,11 +28,13 @@ public class Response<T> implements Serializable {
     setCode(code);
     setMessage(message);
     setResult(result);
+
   }
 
 
   public static <T> Response<T> initSuccess() {
     return initSuccess(null);
+
   }
 
   public static <T> Response<T> initSuccess(T data) {
@@ -55,13 +57,13 @@ public class Response<T> implements Serializable {
     return Objects.equals(SUCCESS_CODE, code);
   }
 
-  public boolean error() {
-    return !success();
-  }
-
-  public boolean error(Code errorCode) {
-    return Objects.equals(errorCode.getCode(), code);
-  }
+//  public boolean error() {
+//    return !success();
+//  }
+//
+//  public boolean error(Code errorCode) {
+//    return Objects.equals(errorCode.getCode(), code);
+//  }
 
 
 }

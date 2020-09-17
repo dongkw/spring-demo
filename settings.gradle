@@ -1,27 +1,27 @@
-pluginManagement {
-    repositories {
-        mavenLocal()
-
-        maven {
-            credentials {
-                username 'g0uETP'
-                password 'mTjlwdQ55W'
-            }
-            url 'https://repo.rdc.aliyun.com/repository/113197-release-J0KMpi/'
-        }
-        maven {
-            credentials {
-                username 'g0uETP'
-                password 'mTjlwdQ55W'
-            }
-            url 'https://repo.rdc.aliyun.com/repository/113197-snapshot-Kix4rb/'
-        }
-        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
-        maven { url "https://plugins.gradle.org/m2/" }
-        mavenCentral()
-    }
-
-}
+//pluginManagement {
+//    repositories {
+//        mavenLocal()
+//
+//        maven {
+//            credentials {
+//                username 'g0uETP'
+//                password 'mTjlwdQ55W'
+//            }
+//            url 'https://repo.rdc.aliyun.com/repository/113197-release-J0KMpi/'
+//        }
+//        maven {
+//            credentials {
+//                username 'g0uETP'
+//                password 'mTjlwdQ55W'
+//            }
+//            url 'https://repo.rdc.aliyun.com/repository/113197-snapshot-Kix4rb/'
+//        }
+//        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+//        maven { url "https://plugins.gradle.org/m2/" }
+//        mavenCentral()
+//    }
+//
+//}
 
 rootProject.name = 'spring-demo'
 include 'eureka', 'config', 'gateway', 'auth'
@@ -36,5 +36,6 @@ findProject(':service:user-service')?.name = 'user-service'
 include 'service:order-service'
 findProject(':service:order-service')?.name = 'order-service'
 include 'service:anox-test'
-include 'plugins'
+include 'service:anox-test-query'
+//include 'plugins'
 
